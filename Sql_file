@@ -1,0 +1,20 @@
+create table hospital_data (
+sent_date date, -- A
+recieved_date date, -- B
+treatment_date date, -- C
+recieved_date_sent_date int,      -- D=c-a
+treatment_date_recieved_date int, -- E=c-b
+sent_date_treatment_date int      -- F=c-a
+);
+
+insert into hospital_data( sent_date,recieved_date,treatment_date,recieved_date_sent_date,
+treatment_date_recieved_date,sent_date_treatment_date)
+values(
+'2023-09-01', 
+'2023-09-10',
+'2023-09-20',
+CASE WHEN DATEDIFF('2023-09-20', '2023-09-01') = 19 THEN 7 ELSE 0 END, -- D
+  CASE WHEN DATEDIFF('2023-09-20', '2023-09-10') = 10 THEN 7 ELSE 0 END, -- E
+  CASE WHEN DATEDIFF('2023-09-20', '2023-09-01') = 19 THEN 14 ELSE 0 END 
+);
+select * from hospital_data
